@@ -6,14 +6,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 public class MainActivity extends ActionBarActivity {
+    public static final String SECRET_MESSAGE = "com.raingxm.hello.SECRET";
+    @InjectView(R.id.edit_message) EditText input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
     }
 
     @Override
@@ -40,6 +48,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void postNewPage(View view) {
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra(SECRET_MESSAGE, input.getText().toString());
         startActivity(intent);
     }
 }
